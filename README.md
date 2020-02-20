@@ -1,6 +1,6 @@
 # SoalShiftSISOP20_modul1_C6
 
-##Soal 2
+## Soal 2
 
 Pada suatu siang, laptop Randolf dan Afairuzr dibajak oleh seseorang dan kehilangan
 data-data penting. Untuk mencegah kejadian yang sama terulang kembali mereka
@@ -21,3 +21,30 @@ maka akan menjadi huruf b.) dan (d) jangan lupa untuk membuat dekripsinya supaya
 nama file bisa kembali.
 HINT: enkripsi yang digunakan adalah caesar cipher.
 *Gunakan Bash Script
+
+## Penyelesaian
+
+```
+#!bin/bash
+
+answer=$@
+p=${#answer}
+a=$(expr "$answer" : "[A-Za-z]*$")
+
+if [ $p -eq $a ]
+then
+	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt
+else
+	echo "argument hanya berupa alphabet"
+fi
+
+now=$(date +%H)
+
+echo $answer| tr $(printf %${now}s | tr ' ' '.')\A-Z A-ZA-Z | tr $(printf %${now}s | tr ' ' '.')\a-z a-za-z > /home/afif/sisop/mod/afif.txt
+
+num=$(cat /home/afif/sisop/mod/afif.txt)
+
+mv  /home/afif/sisop/mod/$answer.txt /home/afif/sisop/mod/$num.txt
+
+rm /home/afif/sisop/mod/afif.txt
+```
