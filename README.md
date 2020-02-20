@@ -1,6 +1,7 @@
 # SoalShiftSISOP20_modul1_C6
 
 ##Soal 2
+
 Pada suatu siang, laptop Randolf dan Afairuzr dibajak oleh seseorang dan kehilangan
 data-data penting. Untuk mencegah kejadian yang sama terulang kembali mereka
 meminta bantuan kepada Whits karena dia adalah seorang yang punya banyak ide.
