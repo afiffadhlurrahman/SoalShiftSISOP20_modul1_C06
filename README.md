@@ -141,6 +141,7 @@ nama file bisa kembali.**
 HINT: enkripsi yang digunakan adalah caesar cipher.
 *Gunakan Bash Script
 
+
 ## Penyelesaian
 
 ```
@@ -168,32 +169,36 @@ mv  /home/afif/sisop/mod/$answer.txt /home/afif/sisop/mod/$num.txt
 rm /home/afif/sisop/mod/afif.txt
 ```
 
-```
-#!bin/bash
+### Pembahasan
 
-answer=$@
-p=${#answer}
-a=$(expr "$answer" : "[A-Za-z]*$")
-```
-Fungsi berikut ini untuk mengambil input argumen dan menghitung panjang string serta menghitung panjang string yang mengandung alphabet atau huruf
+`#!bin/bash` merupakan shebang untuk memulai menjalankan intepreter pada skrip bash.
+`answer=$@` berfungsi untuk declare variable answer untuk menyimpan sementara argument yang diinputkan.
+`p=${#answer}` berfungsi menghitung panjang string argument.
+`a=$(expr "$answer" : "[A-Za-z]*$")`fungsi untuk menghitung panjang string yang mengandung alphabet atau huruf.
 
 ```
 if [ $p -eq $a ]
 then
-	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt
+```
+untuk mengecek apakah argument yang diinputkan seluruhnya merupakan alphabet
+
+`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt`
+untuk men-generate random password (terdapat angka maupun huruf)
+
+```
 else
 	echo "argument hanya berupa alphabet"
 fi
 ```
+jika argument terdapat char selain huruf maka program akan mengeluarkan output "argument hanya berupa alphabet" dan password tidak akan ter-generate
 
 Untuk mengecek apakah semua isi dari argumen itu adalah alphabet. Jika iya, maka program akan generate password yang panjangnya 28 dan mengandung alphabet maupun numerik. Jika tidak, program akan mengeluarkan output "argumen hanya berupa alphabet".
 
+`now=$(date +%H)` untuk mengetahui waktu ketika pembuatan file
 ```
-now=$(date +%H)
-
 echo $answer| tr $(printf %${now}s | tr ' ' '.')\A-Z A-ZA-Z | tr $(printf %${now}s | tr ' ' '.')\a-z a-za-z > /home/afif/sisop/mod/afif.txt
 ```
-Untuk mengecek jam pada saat pembuatan file password tersebut dan men-generate nama untuk file password (harus terdiri dari a-z dan A-Z) dan disimpan pada sebuah file untuk sementara.
+Untuk men-generate nama untuk file password (harus terdiri dari a-z dan A-Z) menggunakan pola yang sudah dijelaskan pada soal dan disimpan pada sebuah file untuk sementara.
 
 ```
 num=$(cat /home/afif/sisop/mod/afif.txt)
@@ -240,3 +245,37 @@ Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log m
 ekstensi ".log.bak". Hint : Gunakan wget.log untuk membuat location.log yang isinya
 merupakan hasil dari grep "Location".
 *Gunakan Bash, Awk dan Crontab
+
+## Penyelesaian
+
+```
+#!bin/bash
+
+for ((num=1; num<=28; num=num+1))
+do
+  wget -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
+  log=log_pdkt_kusuma_$num.txt
+  date >> $log
+done
+```
+### Pembahasan
+`#!bin/bash`  merupakan shebang untuk memulai menjalankan intepreter pada skrip bash.
+```
+for ((num=1; num<=28; num=num+1))
+do
+```
+untuk melakukan perulangan sebanyak 28 kali yang nanti digunakan untuk mendowload 28 gambar.
+```
+ wget -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
+```
+berfungsi untuk mendownload. `-O  pdkt_kusuma_$num` untuk me-rename nama file yang di download.
+```
+log=log_pdkt_kusuma_$num.txt
+  date >> $log
+```
+berfungsi untuk membuat log dari file yang download. `done` untuk menandakan akhir dari looping
+
+```
+5 6-14 * * 1-5,7 bash soal3.sh
+```
+untuk melakukan crontab pada waktu yang telah ditentukan sesuai soal.
