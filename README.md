@@ -267,7 +267,7 @@ do
 ```
 untuk melakukan perulangan sebanyak 28 kali yang nanti digunakan untuk mendowload 28 gambar.
 ```
-  wget -O pdkt_kusuma_$num -a wget.log "https://loremflickr.com/320/240/cat"
+wget -O pdkt_kusuma_$num -a wget.log "https://loremflickr.com/320/240/cat"
 ```
 berfungsi untuk mendownload. `-O  pdkt_kusuma_$num` untuk me-rename nama file yang di download.`-a wget.log` untuk mendapatkan log dari hasil download.
 `done` untuk menandakan akhir dari looping
