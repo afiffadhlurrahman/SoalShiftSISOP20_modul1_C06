@@ -1,4 +1,4 @@
-# SoalShiftSISOP20_modul1_C6
+# SoalShiftSISOP20_modul1_C06
 
 ## Soal 1
 
