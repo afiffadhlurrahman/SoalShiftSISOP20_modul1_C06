@@ -17,7 +17,7 @@ laporan tersebut.**
 
 ## Penyelesaian 
 Penyelesaian nomor 1a, 1b, dan 1c menggunakan Awk
-## Penyelesaian soal 1.a
+### Penyelesaian soal 1.a
 ```
 #!/bin/bash
 
@@ -49,7 +49,7 @@ Kemudian array tmp[] digunkanan untuk memasukan nilai profit(diambil dari kolom 
 END hanya akan berjalan sekali setelah proses selesai. Didalam END terdapat loop untuk setiap region didalam array, dan dicari region yang memiliki profit paling rendah diantara region-region yang ada di dalam array tmp[]. 
 Setelah loop selesai, didapat profit terendah dan nama regionnya yang kemudian akan di print.
 
-## Penyelesaian soal 1.b
+### Penyelesaian soal 1.b
 penyelesaian soal 1.b mirip dengan penyelesaian soal 1.a
 ```
 #!/bin/bash
@@ -88,7 +88,7 @@ Kemudian array tmp[] digunkanan untuk memasukan nilai profit(diambil dari kolom 
 
 END hanya akan berjalan sekali setelah proses selesai. Didalam END terdapat loop untuk setiap state didalam array, dan dicari state yang memiliki profit paling rendah diantara semua state yang ada di dalam array tmp[]. dalam loop ini juga disimpan data profit terkecil kedua dan nama statenya. Setelah loop selesai, didapat profit terendah pertama dan kedua dan nama regionnya yang kemudian akan di print.
 
-## Penyelesaian soal 1.c
+### Penyelesaian soal 1.c
 ```
 #!/bin/bash
 
