@@ -1,7 +1,7 @@
 #!/bin/bash
 
 awk '
-BEGIN {FS = "\t" ; n=0}
+BEGIN {FS = "\t"}
 
 {
  if($13 ~ /^Central/){
