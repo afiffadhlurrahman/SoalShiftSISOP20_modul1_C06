@@ -258,6 +258,9 @@ do
   date >> $log
 done
 ```
+```
+5 6-14 * * 1-5,7 bash soal3.sh
+```
 ### Pembahasan
 `#!bin/bash`  merupakan shebang untuk memulai menjalankan intepreter pada skrip bash.
 ```
