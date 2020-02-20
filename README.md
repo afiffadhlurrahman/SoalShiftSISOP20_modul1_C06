@@ -259,7 +259,7 @@ do
 done
 ```
 ```
-5 6-14 * * 1-5,7 bash soal3.sh
+5 6-23/8 * * 0-5 bash soal3a.sh
 ```
 ### Pembahasan
 `#!bin/bash`  merupakan shebang untuk memulai menjalankan intepreter pada skrip bash.
@@ -279,6 +279,6 @@ log=wget.log
 berfungsi untuk membuat log dari file yang download. `done` untuk menandakan akhir dari looping
 
 ```
-5 6-23/8 * * 0-5 bash soal3.sh
+5 6-23/8 * * 0-5 bash soal3a.sh
 ```
 untuk melakukan crontab pada waktu yang telah ditentukan sesuai soal. menit ke 5 dari jam 6-23 berjalan setiap 8 jam hari minggu-jumat
