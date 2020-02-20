@@ -15,6 +15,9 @@ Whits memohon kepada kalian yang sudah jago mengolah data untuk mengerjakan
 laporan tersebut.**
 *Gunakan Awk dan Command pendukung
 
+## Penyelesaian 
+Penyelesaian nomor 1a, 1b, dan 1c menggunakan Awk
+## Penyelesaian soal 1.a
 ```
 #!/bin/bash
 
@@ -35,6 +38,86 @@ print "lowest profit region : ", lowestReg, low
 }
 ' Sample-Superstore.tsv
 ```
+BEGIN hanya akan berjalan sekali sebelum mulai. Didalam BEGIN terdapat FS="\t" yang menunjukan Field Separatornya adalah tab.
+```
+{
+if($13 != "Region") tmp[$13]+=$21
+}
+```
+Kemudian array tmp[] digunkanan untuk memasukan nilai profit(diambil dari kolom $21) dari setiap region dengan indexnya berupa nama region(diambil dari kolom $13). Penggunaan if($13 != "Region") untuk mengambil data tanpa judul tabelnya.
+
+END hanya akan berjalan sekali setelah proses selesai. Didalam END terdapat loop untuk setiap region didalam array, dan dicari region yang memiliki profit paling rendah diantara region-region yang ada di dalam array tmp[]. 
+Setelah loop selesai, didapat profit terendah dan nama regionnya yang kemudian akan di print.
+
+## Penyelesaian soal 1.b
+penyelesaian soal 1.b mirip dengan penyelesaian soal 1.a
+```
+#!/bin/bash
+
+awk '
+BEGIN {FS = "\t" }
+{
+ if($13 ~ /^Central/){
+  tmp[$11]+=$21;
+ }
+}
+END{
+min=10000000
+for(a in tmp){
+  secMin=tmp[a]
+  secState=a
+  if(tmp[a]<min){
+    min=tmp[a]
+    firstState = a;
+  }
+}
+print "first lowest : ", firstState,min
+print "second lowest : ", secState, secMin
+}
+' Sample-Superstore.tsv
+```
+BEGIN hanya akan berjalan sekali sebelum mulai. Didalam BEGIN terdapat FS="\t" yang menunjukan Field Separatornya adalah tab.
+```
+{
+ if($13 ~ /^Central/){
+  tmp[$11]+=$21;
+ }
+}
+```
+Kemudian array tmp[] digunkanan untuk memasukan nilai profit(diambil dari kolom $21) dari setiap state dengan indexnya berupa nama state(diambil dari kolom $11). Penggunaan if($13 ~ /^Central/) untuk mengambil data dari region Central, karena Central merupakan hasil region dengan profit terendah dari hasil 1.a
+
+END hanya akan berjalan sekali setelah proses selesai. Didalam END terdapat loop untuk setiap state didalam array, dan dicari state yang memiliki profit paling rendah diantara semua state yang ada di dalam array tmp[]. dalam loop ini juga disimpan data profit terkecil kedua dan nama statenya. Setelah loop selesai, didapat profit terendah pertama dan kedua dan nama regionnya yang kemudian akan di print.
+
+## Penyelesaian soal 1.c
+```
+#!/bin/bash
+
+awk '
+BEGIN {FS = "\t"}
+{
+if($11 ~ /^Texas/ || $11 ~ /^Illinois/){
+arr[$17]+=$21
+}
+}
+END{
+for(a in arr){
+print arr[a], a
+}
+}
+' Sample-Superstore.tsv | sort -g | head -10
+```
+BEGIN hanya akan berjalan sekali sebelum mulai. Didalam BEGIN terdapat FS="\t" yang menunjukan Field Separatornya adalah tab.
+```
+{
+if($11 ~ /^Texas/ || $11 ~ /^Illinois/){
+arr[$17]+=$21
+}
+```
+Kemudian array arr[] digunkanan untuk memasukan nilai profit(diambil dari kolom $21) dari setiap state dengan indexnya berupa nama product(diambil dari kolom $17). Penggunaan if($11 ~ /^Texas/ || $11 ~ /^Illinois/) untuk mengambil data dari state Texas atau Illinois, karena 2 state tersebut merupakan state dengan profit terendah dari hasil 1.b
+```
+| sort -g | head -10
+```
+Disini, digunakan sort -g (general number sort) untuk mengurutkan semua data yang di print di kolom pertama sehingga bisa didapatkan product dengan profit terendah hingga tertinggi. Karena di soal hanya diminta 10 product dengan profit terendah, maka digunakan head -10 untuk mengambil 10 data pertama.
 
 ## Soal 2
 
