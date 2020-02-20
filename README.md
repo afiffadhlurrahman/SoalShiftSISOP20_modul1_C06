@@ -253,9 +253,7 @@ merupakan hasil dari grep "Location".
 
 for ((num=1; num<=28; num=num+1))
 do
-  wget -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
-  log=wget.log
-  date >> $log
+  wget -a wget.log -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
 done
 ```
 ```
@@ -269,14 +267,10 @@ do
 ```
 untuk melakukan perulangan sebanyak 28 kali yang nanti digunakan untuk mendowload 28 gambar.
 ```
- wget -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
+  wget -a wget.log -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
 ```
-berfungsi untuk mendownload. `-O  pdkt_kusuma_$num` untuk me-rename nama file yang di download.
-```
-log=wget.log
-  date >> $log
-```
-berfungsi untuk membuat log dari file yang download. `done` untuk menandakan akhir dari looping
+berfungsi untuk mendownload.`-a wget.log` untuk mendapatkan log dari hasil download. `-O  pdkt_kusuma_$num` untuk me-rename nama file yang di download.
+`done` untuk menandakan akhir dari looping
 
 ```
 5 6-23/8 * * 0-5 bash soal3a.sh
