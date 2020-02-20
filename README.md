@@ -254,7 +254,7 @@ merupakan hasil dari grep "Location".
 for ((num=1; num<=28; num=num+1))
 do
   wget -O pdkt_kusuma_$num "https://loremflickr.com/320/240/cat"
-  log=log_pdkt_kusuma_$num.txt
+  log=wget.log
   date >> $log
 done
 ```
@@ -270,7 +270,7 @@ untuk melakukan perulangan sebanyak 28 kali yang nanti digunakan untuk mendowloa
 ```
 berfungsi untuk mendownload. `-O  pdkt_kusuma_$num` untuk me-rename nama file yang di download.
 ```
-log=log_pdkt_kusuma_$num.txt
+log=wget.log
   date >> $log
 ```
 berfungsi untuk membuat log dari file yang download. `done` untuk menandakan akhir dari looping
