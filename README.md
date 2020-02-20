@@ -12,7 +12,7 @@ sedikit berdasarkan hasil poin a
 c. Tampilkan 10 produk (product name) yang memiliki keuntungan (profit) paling
 sedikit berdasarkan 2 negara bagian (state) hasil poin b
 Whits memohon kepada kalian yang sudah jago mengolah data untuk mengerjakan
-laporan tersebut.
+laporan tersebut.**
 *Gunakan Awk dan Command pendukung
 
 ## Soal 2
