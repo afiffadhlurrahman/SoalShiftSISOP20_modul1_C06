@@ -48,3 +48,46 @@ mv  /home/afif/sisop/mod/$answer.txt /home/afif/sisop/mod/$num.txt
 
 rm /home/afif/sisop/mod/afif.txt
 ```
+
+```
+#!bin/bash
+
+answer=$@
+p=${#answer}
+a=$(expr "$answer" : "[A-Za-z]*$")
+```
+Fungsi berikut ini untuk mengambil input argumen dan menghitung panjang string serta menghitung panjang string yang mengandung alphabet atau huruf
+
+```
+if [ $p -eq $a ]
+then
+	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt
+else
+	echo "argument hanya berupa alphabet"
+fi
+```
+
+Untuk mengecek apakah semua isi dari argumen itu adalah alphabet. Jika iya, maka program akan generate password yang panjangnya 28 dan mengandung alphabet maupun numerik. Jika tidak, program akan mengeluarkan output "argumen hanya berupa alphabet".
+
+```
+now=$(date +%H)
+
+echo $answer| tr $(printf %${now}s | tr ' ' '.')\A-Z A-ZA-Z | tr $(printf %${now}s | tr ' ' '.')\a-z a-za-z > /home/afif/sisop/mod/afif.txt
+```
+Untuk mengecek jam pada saat pembuatan file password tersebut dan men-generate nama untuk file password (harus terdiri dari a-z dan A-Z) dan disimpan pada sebuah file untuk sementara.
+
+```
+num=$(cat /home/afif/sisop/mod/afif.txt)
+```
+Mengambil data dari file kemudian dimasukkan ke dalam sebuah variabel.
+
+```
+mv  /home/afif/sisop/mod/$answer.txt /home/afif/sisop/mod/$num.txt
+```
+Rename nama file awal menggunakan enkripsi yang sudah dibuat pada proses sebelumnya
+
+```
+rm /home/afif/sisop/mod/afif.txt
+```
+Untuk menghapus file sementara yang menyimpan nama file enkripsi
+
