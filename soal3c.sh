@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir kenangan
+mkdir duplicate
+
 cat wget.log | grep Location: > location.log
 
 awk 'BEGIN{num=0}
