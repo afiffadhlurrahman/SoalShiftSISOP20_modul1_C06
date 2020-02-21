@@ -5,4 +5,4 @@ echo $arg| tr $(printf %${buat}s | tr ' ' '.')\A-Z A-ZA-Z | tr $(printf %${buat}
 
 nama=$(cat /home/afif/sisop/mod/afif.txt)
 mv /home/afif/sisop/mod/$arg.txt /home/afif/sisop/mod/$nama.txt
-rm /home/afif/sisop/mod/afif.txt
+rm /home/afif/sisop/mod/afif.txt	
