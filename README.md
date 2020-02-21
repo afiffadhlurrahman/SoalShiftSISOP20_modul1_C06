@@ -144,6 +144,8 @@ HINT: enkripsi yang digunakan adalah caesar cipher.
 
 ## Penyelesaian
 
+### Enkripsi
+
 ```
 #!bin/bash
 
@@ -168,9 +170,19 @@ mv  /home/afif/sisop/mod/$answer.txt /home/afif/sisop/mod/$num.txt
 
 rm /home/afif/sisop/mod/afif.txt
 ```
+### Dekripsi
+```
+arg=$@
+buat=$((26-$(date -d "@$(stat -c '%Y' /home/afif/sisop/mod/$arg.txt)" '+%H')))
 
-### Pembahasan
+echo $arg| tr $(printf %${buat}s | tr ' ' '.')\A-Z A-ZA-Z | tr $(printf %${buat}s | tr ' ' '.')\a-z a-za-z > /home/afif/sisop/mod/afif.txt
 
+nama=$(cat /home/afif/sisop/mod/afif.txt)
+mv /home/afif/sisop/mod/$arg.txt /home/afif/sisop/mod/$nama.txt
+rm /home/afif/sisop/mod/afif.txt
+```
+
+## Pembahasan Enkripsi
 `#!bin/bash` merupakan shebang untuk memulai menjalankan intepreter pada skrip bash.
 `answer=$@` berfungsi untuk declare variable answer untuk menyimpan sementara argument yang diinputkan.
 `p=${#answer}` berfungsi menghitung panjang string argument.
@@ -215,6 +227,30 @@ rm /home/afif/sisop/mod/afif.txt
 ```
 Untuk menghapus file sementara yang menyimpan nama file enkripsi
 
+
+## Pembahasan Dekripsi
+`arg=$@` untuk mengambil argument dan dimasukkan ke variable arg.
+```
+buat=$((26-$(date -d "@$(stat -c '%Y' /home/afif/sisop/mod/$arg.txt)" '+%H')))
+```
+Untuk mendapatkan tanggal kapan dibuat nya file, serta dikurangi 26 agar bisa kembali menjadi nama yang sama pada saat awal sebelum di enkripsi.
+```
+echo $arg| tr $(printf %${buat}s | tr ' ' '.')\A-Z A-ZA-Z | tr $(printf %${buat}s | tr ' ' '.')\a-z a-za-z > /home/afif/sisop/mod/afif.txt
+```
+Untuk memasukkan hasil nama file yang telah di dekripsi dan disimpan pada file sementara.
+```
+nama=$(cat /home/afif/sisop/mod/afif.txt)
+```
+Untuk memasukkan nama file ke dalam variable nama.
+```
+mv /home/afif/sisop/mod/$arg.txt /home/afif/sisop/mod/$nama.txt
+```
+Untuk mengganti nama file
+```
+rm /home/afif/sisop/mod/afif.txt
+```
+Untuk menghapus file sementara.
+
 ## Soal 3
 1 tahun telah berlalu sejak pencampakan hati Kusuma. Akankah sang pujaan hati
 kembali ke naungan Kusuma? Memang tiada maaf bagi Elen. Tapi apa daya hati yang
@@ -258,7 +294,7 @@ done
 ```
 ### penyelesaian 3b
 ```
-5 6-23/8 * * 0-5 bash soal3a.sh
+5 6-23/8 * * 0-5 bash soal3.sh
 ```
 ### penyelesaian 3c
 ```
