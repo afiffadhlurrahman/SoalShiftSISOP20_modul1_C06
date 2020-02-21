@@ -247,7 +247,7 @@ merupakan hasil dari grep "Location".
 *Gunakan Bash, Awk dan Crontab
 
 ## Penyelesaian
-
+### penyelesaian 3a
 ```
 #!bin/bash
 
@@ -256,8 +256,42 @@ do
   wget -O pdkt_kusuma_$num -a wget.log "https://loremflickr.com/320/240/cat"
 done
 ```
+### penyelesaian 3b
 ```
 5 6-23/8 * * 0-5 bash soal3a.sh
+```
+### penyelesaian 3c
+```
+#!/bin/bash
+
+mkdir kenangan
+mkdir duplicate
+
+cat wget.log | grep Location: > location.log
+
+awk 'BEGIN{num=0}
+{
+ print $2 
+}
+' location.log | 
+awk 'BEGIN{n=0}
+{
+ n++;
+ arr[$1]++
+ if(arr[$1]>1) com = "mv pdkt_kusuma_" n " duplicate/duplicate_" n
+ else com = "mv pdkt_kusuma_" n " kenangan/kenangan_" n 
+ 
+ system(com)
+}
+'
+
+ls *.log |
+awk '
+{
+ com = "cp " $0 " " $0 ".bak"
+ system(com)
+}
+' 
 ```
 ### Pembahasan
 `#!bin/bash`  merupakan shebang untuk memulai menjalankan intepreter pada skrip bash.
@@ -276,3 +310,33 @@ berfungsi untuk mendownload. `-O  pdkt_kusuma_$num` untuk me-rename nama file ya
 5 6-23/8 * * 0-5 bash soal3a.sh
 ```
 untuk melakukan crontab pada waktu yang telah ditentukan sesuai soal. menit ke 5 dari jam 6-23 berjalan setiap 8 jam hari minggu-jumat
+
+`mkdir kenangan` untuk membuat directory baru bernama kenangan
+`mkdir duplicate` untuk membuat directory bari bernama duplicate
+```
+cat wget.log | grep Location: > location.log
+```
+Fungsi diatas untuk mengambil data yang memiliki kata Location: dari file wget.log dan memasukannya ke file location.log dimana location ini akan digunakan untuk membandingkan gambar yang identik nantinya.
+
+Setelah itu kita menggunakan awk untuk mencari gambar yang identik di file lokasi.log yang sudah kita buat tadi.
+
+Kemudian setelah mendapat lokasi masing-masing gambae, kita masukan gambar ke array dengan lokasi gambar sebagai indexnya dan kita hitung ada berapa gambar yang memiliki lokasi yang sama. `arr[$1]++`. kita juga melakukan `n++` untuk memberi nomor/index pada masing-masing gambar. 
+
+Jika terdapat gambar yang memiliki lokasi yang sama ( dalam hal ini `arr[$1]>1`) maka kita pindahkan gambar tersebut ke directory duplicate dengan `com = "mv pdkt_kusuma_" n " duplicate/duplicate_" n`
+
+dan untuk gambar sisanya kita masukan ke directory kenangan dengan `com = "mv pdkt_kusuma_" n " kenangan/kenangan_" n ` 
+
+lalu kita gunakan `system(com)` untuk menjalankannya pada perintah yang ada
+
+```
+ls *.log |
+awk '
+{
+ com = "cp " $0 " " $0 ".bak"
+ system(com)
+}
+' 
+```
+lalu terakhir kita mencari semua file yang memiliki extensi .log dengan `ls *.log` dan dengan menggunakan awk, kita copy(backup) semua file yang memiliki extensi .log dengan menggunakan extensi .log.bak.
+
+
