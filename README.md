@@ -1,4 +1,5 @@
 # SoalShiftSISOP20_modul1_C06
+## Nama : Afif dan Vincent (C06)
 
 ## Soal 1
 
