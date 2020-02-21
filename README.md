@@ -38,15 +38,23 @@ print "lowest profit region : ", lowestReg, low
 }
 ' Sample-Superstore.tsv
 ```
-BEGIN hanya akan berjalan sekali sebelum mulai. Didalam BEGIN terdapat FS="\t" yang menunjukan Field Separatornya adalah tab.
+BEGIN hanya akan berjalan sekali sebelum mulai. Didalam BEGIN terdapat `FS="\t"` yang menunjukan Field Separatornya adalah tab.
 ```
 {
 if($13 != "Region") tmp[$13]+=$21
 }
 ```
-Kemudian array tmp[] digunkanan untuk memasukan nilai profit(diambil dari kolom $21) dari setiap region dengan indexnya berupa nama region(diambil dari kolom $13). Penggunaan if($13 != "Region") untuk mengambil data tanpa judul tabelnya.
+Kemudian array `tmp[]` digunkanan untuk memasukan nilai profit(diambil dari kolom $21) dari setiap region dengan indexnya berupa nama region(diambil dari kolom $13). Penggunaan `if($13 != "Region")` untuk mengambil data tanpa judul tabelnya.
 
-END hanya akan berjalan sekali setelah proses selesai. Didalam END terdapat loop untuk setiap region didalam array, dan dicari region yang memiliki profit paling rendah diantara region-region yang ada di dalam array tmp[]. 
+END hanya akan berjalan sekali setelah proses selesai. Didalam END terdapat loop untuk setiap region didalam array, dan dicari region yang memiliki profit paling rendah diantara region-region yang ada di dalam array `tmp[]`. 
+```
+if(tmp[a]<low){
+    low=tmp[a]
+    lowestReg=a
+  }
+```
+nilai `tmp[a]` dimasukan ke `low` lalu dibandingkan dengan nilai `tmp[a]` lainnya. dan jika didapatkan nilai yang lebih rendah, lalu akan dimasukan ke `low`. proses ini dilakukan secara berulang hingga mendapatkan profit terendah
+
 Setelah loop selesai, didapat profit terendah dan nama regionnya yang kemudian akan di print.
 
 ### Penyelesaian soal 1.b
@@ -347,6 +355,7 @@ berfungsi untuk mendownload. `-O  pdkt_kusuma_$num` untuk me-rename nama file ya
 ```
 untuk melakukan crontab pada waktu yang telah ditentukan sesuai soal. menit ke 5 dari jam 6-23 berjalan setiap 8 jam hari minggu-jumat
 
+untuk mengerjakan soal 3c, pertama kita buat directory baru,
 `mkdir kenangan` untuk membuat directory baru bernama kenangan
 `mkdir duplicate` untuk membuat directory bari bernama duplicate
 ```
