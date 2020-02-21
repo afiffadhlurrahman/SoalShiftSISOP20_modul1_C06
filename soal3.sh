@@ -17,12 +17,18 @@ awk 'BEGIN{num=0}
  print $2 
 }
 ' location.log | 
-awk 'BEGIN{n=0}
+awk 'BEGIN{n=0;j=0;k=0}
 {
  n++;
  arr[$1]++
- if(arr[$1]>1) com = "mv pdkt_kusuma_" n " duplicate/duplicate_" n
- else com = "mv pdkt_kusuma_" n " kenangan/kenangan_" n 
+ if(arr[$1]>1) {
+	j++
+	com = "mv pdkt_kusuma_" n " duplicate/duplicate_" j
+ }
+ else {
+	k++;
+	com = "mv pdkt_kusuma_" n " kenangan/kenangan_" k
+ }
  
  system(com)
 }
