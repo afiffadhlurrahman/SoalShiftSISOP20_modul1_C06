@@ -6,7 +6,11 @@ a=$(expr "$answer" : "[A-Za-z]*$")
 
 if [ $p -eq $a ]
 then
-	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt
+	fileOut="$@.txt"
+	cat /dev/urandom | tr -dc 'A-Z' | head -c 1 >> $fileOut
+	cat /dev/urandom | tr -dc 'a-z' | head -c 1 >> $fileOut
+	cat /dev/urandom | tr -dc '0-9' | head -c 1 >> $fileOut
+	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 1 | head -n 1 >> $fileOut
 else
 	echo "argument hanya berupa alphabet"
 fi
