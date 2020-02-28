@@ -164,7 +164,11 @@ a=$(expr "$answer" : "[A-Za-z]*$")
 
 if [ $p -eq $a ]
 then
-	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt
+	fileOut="$@.txt"
+	cat /dev/urandom | tr -dc 'A-Z' | head -c 1 >> $fileOut
+	cat /dev/urandom | tr -dc 'a-z' | head -c 1 >> $fileOut
+	cat /dev/urandom | tr -dc '0-9' | head -c 1 >> $fileOut
+	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 2 | head -n 1 >> $fileOut
 else
 	echo "argument hanya berupa alphabet"
 fi
@@ -203,9 +207,20 @@ then
 ```
 untuk mengecek apakah argument yang diinputkan seluruhnya merupakan alphabet
 
-`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 > /home/afif/sisop/mod/$@.txt`
+```
+fileOut="$@.txt"
+```
+untuk menbuat file dengan nama sesuai argument, dan file tersebut dijadikan argument 
+```
+cat /dev/urandom | tr -dc 'A-Z' | head -c 1 >> $fileOut
+cat /dev/urandom | tr -dc 'a-z' | head -c 1 >> $fileOut
+cat /dev/urandom | tr -dc '0-9' | head -c 1 >> $fileOut
+```
+untuk mengenerate password dan memastikan bahwa pasti ada huruf besar, huruf kecil dan huruf
+```
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 25 | head -n 1 >> $fileOut`
+```
 untuk men-generate random password (terdapat angka maupun huruf)
-
 ```
 else
 	echo "argument hanya berupa alphabet"
